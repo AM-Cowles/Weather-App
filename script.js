@@ -34,7 +34,47 @@ function displayCityWeather(city) {
             let locationIcon = $('.weather-icon');
             $('locationIcon').attr('src', iconurl);
 
-            
-        })
+            var iconImage = $('<img><img/>');
+            iconImage.attr('src', "icons/" +iconcode+ ".png");
+            $(".weather-icon").empty();
+            $(".weather-icon").append(iconImage);
+
+            lat = parseInt(response.coord.lat);
+            long = parseInt(response.coord.lon);
+            displayCityWeatherWithLatLong(let,long);
+
+        });
     }
+
+    function displayCityWeatherWithLatLong(lat,long) {
+        var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat+ "&lon=" + long + "&appid=69712313de0b3188381f1b726de5c5a9";
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+        console.log(response);
+        
+        var humidity = response.current.humidity;
+        $("#humid_val").text(humidity + " %");
+        var uvi = response.current.uvi;
+        $("#uv_val").text(uvi);
+
+        if (Number(uvi) <= 2){
+            $("#uv_val").css('background-color', 'green');
+        }
+        else if (Number(uvi) <= 5&Number(uvi) > 2){
+            $("#uv_val").css('background-color', 'orange');
+        }
+        else if (Number(uvi) <= 7&Number(uvi) > 5){
+            $("uv_val").css('background-color', 'red');
+        }
+
+        var forecast = response.daily;
+        renderForecast(forecast);
+        });
+    }
+
+    
+
 }
