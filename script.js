@@ -1,7 +1,9 @@
+// global variables
 var lat;
 var long;
 var cities;
 
+// displays info from local storage
 var localStorageCont = JSON.parse(localStorage.getItem("city_list"));
 if (localStorageCont === null) {
     cities = [];
@@ -12,8 +14,9 @@ else {
     displayCityWeather(city);
 }
 
+// re-renders html to show proper info
 function displayCityWeather(city) {
-    $("#show_city").text(city) {
+    $("#show_city").text(city); {
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=69712313de0b3188381f1b726de5c5a9";
 
         $ajax({
@@ -42,16 +45,15 @@ function displayCityWeather(city) {
             lat = parseInt(response.coord.lat);
             long = parseInt(response.coord.lon);
             displayCityWeatherWithLatLong(let,long);
-
         });
     }
 
     function displayCityWeatherWithLatLong(lat,long) {
-        var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat+ "&lon=" + long + "&appid=69712313de0b3188381f1b726de5c5a9";
+    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat+ "&lon=" + long + "&appid=69712313de0b3188381f1b726de5c5a9";
 
         $.ajax({
-            url: queryURL,
-            method: "GET"
+        url: queryURL,
+        method: "GET"
         }).then(function(response) {
         console.log(response);
         
@@ -75,6 +77,23 @@ function displayCityWeather(city) {
         });
     }
 
-    
+// adds event listeners to all elements with "city" class on click
+$(document).on("click", "city", savedCityClick);
+
+// function to show cities
+function renderButtons() {
+    $("#cities-view").empty();
+
+    for (var i = 0; i < cities.length; i++) {
+        var a = $("<button>");
+        a.addClass("city");
+        a.attr("data-name", cities[i]);
+        a.text(cities[i]);
+        var linebreak = $("<br>");
+        $("#cities-view").prepend(a, linebreak);
+    }
+}
+
+
 
 }
