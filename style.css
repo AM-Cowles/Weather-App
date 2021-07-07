@@ -72,7 +72,26 @@ h3 {
     }
 
     form {
-        
+        width: 85vw;
+    }
+
+    #weather_info {
+        width: 85vw;
+    }
+
+    #five_day_forecast {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 85vw;
+    }
+
+    #five_days_weather {
+        width: 80vw;
+    }
+
+    .card-body {
+        flex-shrink: 2;
     }
 }
 
