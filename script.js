@@ -94,6 +94,25 @@ function renderButtons() {
     }
 }
 
+// function that handles events where the search button is clicked
+$("#button-addon2").on("click", function(event) {
+    event.preventDefault();
+    var city = $("#search-city").val().trim();
+    if (cities.indexOf(city) === -1){
+        cities.push(city);
+    }
+    localStorage.setItem("city_list", JSON.stringify(cities));
 
+    renderButtons();
+    $("#show_city").text(city);
+    displayCityWeather(city);
+});
+
+// this calls the renderButtons function to show search history buttons
+renderButtons();
+
+function savedCityClick(event) {
+    
+}
 
 }
