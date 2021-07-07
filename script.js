@@ -37,14 +37,14 @@ function displayCityWeather(city) {
             let locationIcon = $('.weather-icon');
             $('locationIcon').attr('src', iconurl);
 
-            var iconImage = $('<img><img/>');
+            var iconImage = $('<img></img>');
             iconImage.attr('src', "icons/" +iconcode+ ".png");
             $(".weather-icon").empty();
             $(".weather-icon").append(iconImage);
 
             lat = parseInt(response.coord.lat);
-            long = parseInt(response.coord.lon);
-            displayCityWeatherWithLatLong(let,long);
+            long = parseInt(response.coord.long);
+            displayCityWeatherWithLatLong(lat,long);
         });
     }
 
@@ -63,10 +63,10 @@ function displayCityWeather(city) {
         $("#uv_val").text(uvi);
 
         if (Number(uvi) <= 2){
-            $("#uv_val").css('background-color', 'green');
+            $("#uv_val").css('background-color', 'lightgreen');
         }
         else if (Number(uvi) <= 5&Number(uvi) > 2){
-            $("#uv_val").css('background-color', 'orange');
+            $("#uv_val").css('background-color', 'yellow');
         }
         else if (Number(uvi) <= 7&Number(uvi) > 5){
             $("uv_val").css('background-color', 'red');
@@ -78,7 +78,7 @@ function displayCityWeather(city) {
     }
 
 // adds event listeners to all elements with "city" class on click
-$(document).on("click", "city", savedCityClick);
+$(document).on("click", ".city", savedCityClick);
 
 // function to show cities
 function renderButtons() {
