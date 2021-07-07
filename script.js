@@ -10,14 +10,14 @@ if (localStorageCont === null) {
 }
 else {
     cities = localStorageCont
-    city = cities[cities.length-1];
+    city = cities[cities.length - 1];
     displayCityWeather(city);
 }
 
 // re-renders html to show proper info
 function displayCityWeather(city) {
     $("#show_city").text(city); {
-        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=69712313de0b3188381f1b726de5c5a9";
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b0f4e53a695ce582edaa8bd659e5ce83";
 
         $ajax({
             url: queryURL,
@@ -27,7 +27,7 @@ function displayCityWeather(city) {
             var date = moment.unix(response.dt).format("MM/DD/YYYY");
             $("#show_city").text(city + " (" + date + ")");
 
-            var temperature = ((response.main.temp - 273.15)*(9/5) + 32).toFixed(1);
+            var temperature = ((response.main.temp - 273.15) * (9/5) + 32).toFixed(1);
             $("#temp_val").text(temperature + " °F");
             var wind_speed = response.wind.speed;
             $("#wind_val").text(wind_speed + " MPH");
@@ -43,13 +43,13 @@ function displayCityWeather(city) {
             $(".weather-icon").append(iconImage);
 
             lat = parseInt(response.coord.lat);
-            long = parseInt(response.coord.long);
+            long = parseInt(response.coord.lon);
             displayCityWeatherWithLatLong(lat,long);
         });
     }
 
-    function displayCityWeatherWithLatLong(lat,long) {
-    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat+ "&lon=" + long + "&appid=69712313de0b3188381f1b726de5c5a9";
+    function displayCityWeatherWithLatLong(lat,lon) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat+ "&lon=" + lon + "&appid=b0f4e53a695ce582edaa8bd659e5ce83";
 
         $.ajax({
         url: queryURL,
