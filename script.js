@@ -112,7 +112,32 @@ $("#button-addon2").on("click", function(event) {
 renderButtons();
 
 function savedCityClick(event) {
-    
+    event.preventDefault();
+    var city = $(this).attr("data-name");
+    displayCityWeather(city)
 }
+
+// renders html to show 5-day weather forecast
+function renderForecast(forecast) {
+    $("#five_day_forecast").empty();
+    for (var i = 0; i < 5; i ++) {
+        var date = moment.unix(forecast[i].dt).format("MM/DD/YYYY");
+        var iconcode = forecast[i].weather[0].icon;
+        var temp = ((forecast[i].temp.day - 273.15) * (9/5) + 32).toFixed(1);
+        var humid = forecast[i].humidity;
+
+        var forecast_day = $(`
+        <div class="card" id="five_days_weather" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">${date}</h5>
+                <img src="icons/${iconcode}.png"></img>
+                <p class="card-text">${"Temp: " + temp + "%"}</p>
+                <p class="card-text">${"Humidity: " + humid + "%"}</p>
+            </div>
+        </div`)
+
+        $("#five_day_forecast").append(forecast_day);
+        }
+    }
 
 }
