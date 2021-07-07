@@ -17,7 +17,7 @@ else {
 // re-renders html to show proper info
 function displayCityWeather(city) {
     $("#show_city").text(city); {
-        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=1f6d6659b181d8b04d454dbc4b1b37db";
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=1f6d6659b181d8b04d454dbc4b1b37db";
 
         $ajax({
             url: queryURL,
@@ -49,7 +49,7 @@ function displayCityWeather(city) {
     }
 
     function displayCityWeatherWithLatLong(lat,lon) {
-    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat+ "&lon=" + lon + "&APPID=1f6d6659b181d8b04d454dbc4b1b37db";
+    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat+ "&lon=" + lon + "&appid=1f6d6659b181d8b04d454dbc4b1b37db";
 
         $.ajax({
         url: queryURL,
@@ -134,7 +134,7 @@ function renderForecast(forecast) {
                 <p class="card-text">${"Temp: " + temp + "%"}</p>
                 <p class="card-text">${"Humidity: " + humid + "%"}</p>
             </div>
-        </div`)
+        </div`);
 
         $("#five_day_forecast").append(forecast_day);
         }
