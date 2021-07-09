@@ -3,6 +3,8 @@ var lat;
 var long;
 var cities;
 
+var apiKey = "b0f4e53a695ce582edaa8bd659e5ce83";
+
 // displays info from local storage
 var localStorageCont = JSON.parse(localStorage.getItem("city_list"));
 if (localStorageCont === null) {
@@ -10,16 +12,16 @@ if (localStorageCont === null) {
 }
 else {
     cities = localStorageCont
-    city = cities[cities.length - 1];
+    city = cities[cities.length-1];
     displayCityWeather(city);
 }
 
 // re-renders html to show proper info
 function displayCityWeather(city) {
     $("#show_city").text(city); {
-        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=1f6d6659b181d8b04d454dbc4b1b37db";
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b0f4e53a695ce582edaa8bd659e5ce83";
 
-        $ajax({
+        $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function(response) {
@@ -47,38 +49,39 @@ function displayCityWeather(city) {
             displayCityWeatherWithLatLong(lat,long);
         });
     }
+}
 
-    function displayCityWeatherWithLatLong(lat,lon) {
-    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat+ "&lon=" + lon + "&appid=1f6d6659b181d8b04d454dbc4b1b37db";
+function displayCityWeatherWithLatLong(lat,lon) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat+ "&lon=" + long + "&appid=b0f4e53a695ce582edaa8bd659e5ce83";
 
-        $.ajax({
+    $.ajax({
         url: queryURL,
         method: "GET"
-        }).then(function(response) {
+    }).then(function(response) {
         console.log(response);
-        
         var humidity = response.current.humidity;
         $("#humid_val").text(humidity + " %");
         var uvi = response.current.uvi;
         $("#uv_val").text(uvi);
-
-        if (Number(uvi) <= 2){
-            $("#uv_val").css('background-color', 'lightgreen');
+        if (Number(uvi)<=2){
+        $("#uv_val").css('background-color', 'green');
+        } 
+        else if (Number(uvi)<=5&Number(uvi)>2){
+        $("#uv_val").css('background-color', 'yellow');
         }
-        else if (Number(uvi) <= 5&Number(uvi) > 2){
-            $("#uv_val").css('background-color', 'yellow');
+        else if (Number(uvi)<=7&Number(uvi)>5){
+        $("#uv_val").css('background-color', 'orange');
         }
-        else if (Number(uvi) <= 7&Number(uvi) > 5){
-            $("uv_val").css('background-color', 'red');
+        else if (Number(uvi)>7){
+        $("#uv_val").css('background-color', 'red');
         }
-
         var forecast = response.daily;
         renderForecast(forecast);
-        });
-    }
+    });
+}
 
 // adds event listeners to all elements with "city" class on click
-$(document).on("click", ".city", savedCityClick);
+$(document).on('click', '.city', savedCityClick);
 
 // function to show cities
 function renderButtons() {
@@ -134,10 +137,8 @@ function renderForecast(forecast) {
                 <p class="card-text">${"Temp: " + temp + "%"}</p>
                 <p class="card-text">${"Humidity: " + humid + "%"}</p>
             </div>
-        </div`);
+        </div`)
 
-        $("#five_day_forecast").append(forecast_day);
-        }
+    $("#five_day_forecast").append(forecast_day);
     }
-
 }
