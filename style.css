@@ -9,7 +9,7 @@ body {
 .jumbotron {
     padding-top: 30px;
     padding-bottom: 30px;
-    color: lightgray;
+    color:darkslategray;
     background-color: lightsalmon;
     border-radius: 0px;
 }
@@ -26,10 +26,11 @@ main {
 form {
     width: 20vw;
     margin: 10px;
+    background-color: darkslategrey;
 }
 
 #button-addon2 {
-    background-color: white;
+    background-color: lightgrey;
 }
 
 #weather_info {
@@ -51,8 +52,8 @@ form {
 }
 
 #five_days_weather {
-    background-color: cyan;
-    color: lightgrey;
+    background-color:darkslategrey;
+    color: lightsalmon;
     margin: 10px;
 }
 
