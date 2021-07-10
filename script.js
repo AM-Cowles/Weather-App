@@ -33,9 +33,9 @@ function displayCityWeather(city) {
         $("#wind_val").text(wind_speed + " MPH");
 
         var iconcode = response.weather[0].icon;
-        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+        var iconurl = "http://openweathermap.org/img/wn/" + iconcode + "@2x.png";
         let locationIcon = $('.weather-icon');
-        $('#locationIcon').attr('src', iconurl);
+        $('locationIcon').attr('src', iconurl);
 
         var iconImage = $('<img></img>');
         iconImage.attr('src', "icons/" + iconcode + ".png");
