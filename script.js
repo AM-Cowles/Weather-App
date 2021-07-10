@@ -3,6 +3,8 @@ var lat;
 var long;
 var cities;
 
+
+
 // displays info from local storage
 var localStorageCont = JSON.parse(localStorage.getItem("city_list"));
 if (localStorageCont === null) {
@@ -33,12 +35,12 @@ function displayCityWeather(city) {
         $("#wind_val").text(wind_speed + " MPH");
 
         var iconcode = response.weather[0].icon;
-        var iconurl = "http://openweathermap.org/img/wn/" + iconcode + "@2x.png";
+        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
         let locationIcon = $('.weather-icon');
         $('locationIcon').attr('src', iconurl);
 
         var iconImage = $('<img></img>');
-        iconImage.attr('src', "icons/" + iconcode + ".png");
+        iconImage.attr('src', "/icons" + iconcode + ".png");
         $(".weather-icon").empty();
         $(".weather-icon").append(iconImage);
 
@@ -132,7 +134,7 @@ function renderForecast(forecast) {
         <div class="card" id="five_days_weather" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">${date}</h5>
-                <img src="icons/${iconecode}.png"</img>
+                <img src="/icons${iconecode}.png"</img>
                 <p class="card-text">${"Temp: " + temp + " °F"}</p>
                 <p class="card-text">${"Humidity: " + humid + "%"}</p>
             </div>
