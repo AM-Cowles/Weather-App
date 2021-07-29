@@ -18,4 +18,4 @@ SO THAT I can plan a trip accordingly
 
 ## Screenshot
 
-![Image(./Weather App/Weather-App/weather_app.png)]
+![Weather App Screenshot](./weather_app.png)
